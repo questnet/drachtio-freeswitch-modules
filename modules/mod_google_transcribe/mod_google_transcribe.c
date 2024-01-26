@@ -86,8 +86,10 @@ static void responseHandler(switch_core_session_t* session, const char * json, c
 		switch_channel_event_set_data(channel, event);
 		switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "transcription-vendor", "google");
 		switch_event_add_body(event, "%s", json);
+		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "Successfully added event body\n");
 	}
 	if (bugname) switch_event_add_header_string(event, SWITCH_STACK_BOTTOM, "media-bugname", bugname);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "About to fire transcription event\n");
 	switch_event_fire(&event);
 }
 
